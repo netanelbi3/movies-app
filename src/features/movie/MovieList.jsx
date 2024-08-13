@@ -4,7 +4,7 @@ import ItemMovie from "./ItemMovie";
 const MovieList = ({ moviesArr }) => {
   return (
     <div className='row'>
-      {moviesArr.map((movie) => (
+      {moviesArr?.map((movie) => (
         <ItemMovie
           key={movie.imdbID}
           poster={movie.Poster}
