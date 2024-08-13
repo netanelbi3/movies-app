@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./features/layout/Header";
-import movies from "./movies";
 import "./App.css";
 import MovieList from "./features/movie/MovieList";
 import SingleMovie from "./features/movie/SingleMovie";
