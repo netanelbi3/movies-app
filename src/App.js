@@ -5,6 +5,7 @@ import "./App.css";
 import MovieList from "./features/movie/MovieList";
 import SingleMovie from "./features/movie/SingleMovie";
 import axios from "axios";
+//best project
 
 const App = () => {
   const [moviesArr, setMoviesArr] = useState([]);
