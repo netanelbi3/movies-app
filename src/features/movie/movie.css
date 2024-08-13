@@ -13,3 +13,21 @@
 .card img {
   width: 100%;
 }
+.search-block {
+  display: flex;
+}
+
+.search-block input,
+.search-block button {
+  padding: 7px;
+  border-radius: 5px;
+  margin-left: 2px;
+}
+
+.search-block button {
+  background-color: rgba(252, 223, 171, 0.767);
+}
+
+.search-block button::hover {
+  cursor: pointer;
+}

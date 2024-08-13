@@ -1,12 +1,12 @@
 import "./layout.css";
 import Navbar from "./Navbar";
-const Header = () => {
+const Header = ({filteredSearchForMovies}) => {
   return (
     <>
       <header className='header'>
         <h1>Movie Finder</h1>
       </header>
-      <Navbar />
+      <Navbar filteredSearchForMovies={filteredSearchForMovies} />
     </>
   );
 };

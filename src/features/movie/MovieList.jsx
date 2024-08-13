@@ -1,10 +1,10 @@
 import React from "react";
 import "./movie.css";
 import ItemMovie from "./ItemMovie";
-const MovieList = ({ movies }) => {
+const MovieList = ({ moviesArr }) => {
   return (
     <div className='row'>
-      {movies.map((movie) => (
+      {moviesArr.map((movie) => (
         <ItemMovie
           key={movie.imdbID}
           poster={movie.Poster}
