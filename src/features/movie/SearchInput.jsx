@@ -6,8 +6,7 @@ const SearchInput = ({filteredSearchForMovies}) => {
 
     
     const handleInput = (e)=>{
-//    setSearchValue(e.target.parentElement.children[0].value ) 
-        setSearchValue(e.target.value)
+    setSearchValue(e.target.value)
     filteredSearchForMovies(e.target.value) 
         
   }

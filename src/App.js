@@ -18,16 +18,33 @@ const App = () => {
   //     )
   //     setMoviesArr(filtered);
   // };
-  const filteredSearchForMovies = (movieTitle) => {
-     fetchMovies().then((data)=>{
-      const filtered = data.filter(
-        (movie =>
-          movie.Title.toLowerCase().includes(movieTitle.toLowerCase()) ||
-          movie.Year.toLowerCase().includes(movieTitle.toLowerCase()))
-      );
-      setMoviesArr(filtered)
-     })
-  };
+  // const filteredSearchForMovies = (movieTitle) => {
+  //    fetchMovies().then((data)=>{
+  //     const filtered = data.filter(
+  //       (movie =>
+  //         movie.Title.toLowerCase().includes(movieTitle.toLowerCase()) ||
+  //         movie.Year.toLowerCase().includes(movieTitle.toLowerCase()))
+  //     );
+  //     setMoviesArr(filtered)
+  //    })
+  // };
+ const filteredSearchForMovies = (searchValue) => {
+   console.log("Searching for:", searchValue);
+     if (!searchValue.trim()) {
+       fetchMovies().then((data) => {
+         setMoviesArr(data);
+       });
+       return;
+     }
+   fetchMovies(searchValue).then((data) => {
+     if (data) {
+       setMoviesArr(data);
+       localStorage.setItem("movies",JSON.stringify(data))
+     }
+   });
+ };
+
+
   ///option 2 by alexe
   // const filteredSearchForMovies2 = (searchValue)=>{
   //   const filtered = movies.filter(movie=>movie.Title.toLowerCase().includes(searchValue.toLowerCase()))
@@ -42,13 +59,21 @@ const App = () => {
   //     )
   //   );
   // };
-  const fetchMovies = async () => {
-    const url = "https://omdbapi.com/?s=monkey&apikey=e88d8bda";
+  const fetchMovies = async (query='batman') => {
+
+    const url = `https://omdbapi.com/?s=${query}&apikey=e88d8bda`;
     const {data} = await axios.get(url)
+    console.log(data);
+    
     return data.Search;
   };
   useEffect(()=>{
-  fetchMovies().then((data) => setMoviesArr(data));
+    if (localStorage.getItem("movies")) {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+      setMoviesArr(movies);
+    } else {
+      fetchMovies().then((data) => setMoviesArr(data));
+    }
   },[])
   return (
     <BrowserRouter>

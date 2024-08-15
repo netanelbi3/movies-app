@@ -7,18 +7,36 @@ const SingleMovie = () => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    const fetchMovie = async () => {
+    if(localStorage.getItem('movie')){
+      const movie = JSON.parse(localStorage.getItem("movie"));      
+      if (movie.imdbID === id) setMovie(movie);
+      else{
+        const fetchMovie = async () => {
+          const url = `https://www.omdbapi.com/?i=${id}&apikey=e88d8bda`;
+          try {
+            const { data } = await axios.get(url);
+            console.log(data);
+            setMovie(data);
+            localStorage.setItem("movie", JSON.stringify(data));
+          } catch (error) {
+            console.error("Error fetching movie:", error);
+          }
+        };
+        fetchMovie();
+      }
+    }else{const fetchMovie = async () => {
       const url = `https://www.omdbapi.com/?i=${id}&apikey=e88d8bda`;
       try {
         const { data } = await axios.get(url);
         console.log(data);
         setMovie(data);
+        localStorage.setItem("movie", JSON.stringify(data));
       } catch (error) {
         console.error("Error fetching movie:", error);
       }
     };
-
-    fetchMovie();
+    fetchMovie();}
+    
   }, [id]);
 
   return (
